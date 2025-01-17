@@ -19,9 +19,12 @@ type BaseInputEmits = {
 interface BaseInputProps {
   placeholder: string;
   modelValue: string;
+  debounced?: boolean;
 }
 
-const props = defineProps<BaseInputProps>();
+const props = withDefaults(defineProps<BaseInputProps>(), {
+  debounced: false,
+});
 const emits = defineEmits<BaseInputEmits>();
 
 const inputValue = ref<string>(props.modelValue);
