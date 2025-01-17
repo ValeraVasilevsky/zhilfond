@@ -15,3 +15,11 @@ export const fetchUsers = async (
     },
   });
 };
+
+export const fetchUserById = async (userId: string): Promise<User> => {
+  return await api.get("users", {
+    params: {
+      id: userId,
+    },
+  });
+};

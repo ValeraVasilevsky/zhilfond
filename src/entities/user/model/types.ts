@@ -3,4 +3,5 @@ export interface User {
   email: string;
   image: string;
   id: string;
+  phone: string;
 }

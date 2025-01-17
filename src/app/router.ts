@@ -18,11 +18,6 @@ export const router = createRouter({
           component: (): Component => import("pages/main/index.vue"),
           children: [],
         },
-        {
-          path: "/:id",
-          name: "",
-          component: (): Component => import("pages/main/[id]/index.vue"),
-        },
       ],
     },
     {

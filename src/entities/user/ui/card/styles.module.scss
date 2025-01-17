@@ -1,0 +1,34 @@
+$gap: 61px;
+$gap-info: 10px;
+
+.card {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: $gap;
+  width: 100%;
+  height: 100%;
+
+  & .info {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: $gap-info;
+
+    & .field {
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+
+      & .key {
+        color: $black;
+        font-weight: 600;
+      }
+
+      & .value {
+        color: $grey;
+      }
+    }
+  }
+}

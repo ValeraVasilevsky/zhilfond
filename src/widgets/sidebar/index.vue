@@ -15,34 +15,39 @@
         variant="font-s"
         :class="styles.title"
       >
-        Начните поиск
+        {{ titleText }}
       </Typography>
 
-      <UserList v-else />
+      <UserList v-else-if="!isLoading && search" />
     </div>
   </aside>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { UserList, useUserStore } from "entities/user";
 import { Typography, BaseInput, Loader } from "shared/ui";
 import { watchDebounced } from "@vueuse/core";
 
 import styles from "./styles.module.scss";
 
-const { getUsers } = useUserStore();
+const { getUsers, clearUsers } = useUserStore();
 
 const search = ref<string>("");
 const isLoading = ref<boolean>(false);
+const isError = ref<boolean>(false);
+
+const titleText = computed((): string => {
+  return isError.value ? "Ошибка. Повторите снова" : "Начните поиск";
+});
 
 const fetchUsers = async (): Promise<void> => {
-  isLoading.value = true;
+  isError.value = false;
 
   try {
     await getUsers(search.value);
   } catch (error) {
-    console.log(error);
+    isError.value = true;
     return Promise.reject(error);
   } finally {
     isLoading.value = false;
@@ -52,11 +57,18 @@ const fetchUsers = async (): Promise<void> => {
 watchDebounced(
   search,
   async (): Promise<void> => {
+    if (!search.value) {
+      isError.value = false;
+      clearUsers();
+      return;
+    }
+
+    isLoading.value = true;
     await fetchUsers();
   },
   {
-    debounce: 1000,
-    maxWait: 1500,
+    debounce: 500,
+    maxWait: 1000,
   }
 );
 </script>

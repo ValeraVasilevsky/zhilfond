@@ -1,6 +1,6 @@
 <template>
   <article :class="styles.item">
-    <img :src="props.image" :alt="props.name" :class="styles.img" />
+    <img src="/img.png" :alt="props.name" :class="styles.img" />
 
     <div :class="styles.info">
       <Typography variant="font-s" :class="styles.name">
