@@ -1,0 +1,16 @@
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  & .logo {
+    color: $red;
+    cursor: pointer;
+  }
+
+  & .user {
+    color: $black;
+    cursor: pointer;
+  }
+}
