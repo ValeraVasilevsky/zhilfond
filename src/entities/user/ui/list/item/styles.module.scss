@@ -40,7 +40,11 @@ $padding: 15px;
     }
 
     & .email {
+      max-width: 121px;
       color: $grey;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 }
