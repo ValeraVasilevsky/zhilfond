@@ -1,0 +1,23 @@
+$width: 240px;
+$height: 46px;
+$border: 0px 0px 0px 1.5px $white-dark inset;
+
+.input {
+  box-sizing: border-box;
+  width: $width;
+  height: $height;
+  border: 1.5px $white-dark solid;
+  border-radius: $radius-m;
+  color: $grey;
+  font: $font-s;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  outline: none;
+
+  padding: $padding-l;
+
+  &::placeholder {
+    color: $grey;
+  }
+}
