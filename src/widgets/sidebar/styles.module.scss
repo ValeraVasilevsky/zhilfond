@@ -1,0 +1,19 @@
+$padding-y: 27px;
+$padding-x: 23px;
+$gap: 22px;
+
+.sidebar {
+  box-sizing: border-box;
+  width: 293px;
+  height: 100%;
+  padding: $padding-y $padding-x;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: $gap;
+
+  & .title {
+    color: $black;
+  }
+}

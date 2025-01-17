@@ -2,13 +2,11 @@ import { defineConfig } from "vite";
 import { fileURLToPath, URL } from "node:url";
 import vue from "@vitejs/plugin-vue";
 import svgLoader from "vite-svg-loader";
-import { getFonts } from "./src/shared/fonts/unfonts";
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     vue(),
-    getFonts(),
     svgLoader({
       defaultImport: "component",
       svgoConfig: {
@@ -29,6 +27,14 @@ export default defineConfig({
   css: {
     modules: {
       localsConvention: "camelCase",
+    },
+
+    preprocessorOptions: {
+      scss: {
+        additionalData: `
+        @use "shared/ui/theme/variables.scss" as *;
+        `,
+      },
     },
   },
 

@@ -1,0 +1,36 @@
+$padding-y: 30px;
+$padding-x: 21px;
+
+.container {
+  width: 100%;
+  height: 100%;
+
+  box-sizing: border-box;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+
+  background-color: $white;
+  padding: $padding-5xl $padding-5xl 44px $padding-5xl;
+
+  & .wrapper {
+    margin-top: 26px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: stretch;
+    box-shadow: $shadow;
+    border-radius: $radius-l;
+
+    & .page {
+      width: 100%;
+      height: 100%;
+      border-left: 1px solid $grey-light-2;
+      box-sizing: border-box;
+      padding: $padding-y $padding-x;
+    }
+  }
+}
