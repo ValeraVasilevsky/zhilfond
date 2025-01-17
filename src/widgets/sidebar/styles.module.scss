@@ -16,4 +16,10 @@ $gap: 22px;
   & .title {
     color: $black;
   }
+
+  & .list {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
 }

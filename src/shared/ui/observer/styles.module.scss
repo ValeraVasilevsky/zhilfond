@@ -1,0 +1,8 @@
+$height: 5px;
+
+.observer {
+  width: 100%;
+  height: $height;
+  box-sizing: border-box;
+  margin-block: $padding-l;
+}
