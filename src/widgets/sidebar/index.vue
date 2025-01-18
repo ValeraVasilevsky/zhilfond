@@ -10,35 +10,45 @@
 
     <div :class="styles.list">
       <Loader v-if="isLoading" :class="styles.loader" />
-      <Typography
-        v-else-if="!search && !isLoading"
-        variant="font-s"
-        :class="styles.title"
-      >
+
+      <Typography variant="font-s" :class="titleClasses">
         {{ titleText }}
       </Typography>
 
-      <UserList v-else-if="!isLoading && search" />
+      <UserList v-if="!isLoading && search.length && users.length" />
     </div>
   </aside>
 </template>
 
 <script setup lang="ts">
 import { computed, ref } from "vue";
+import { storeToRefs } from "pinia";
 import { UserList, useUserStore } from "entities/user";
 import { Typography, BaseInput, Loader } from "shared/ui";
 import { watchDebounced } from "@vueuse/core";
 
 import styles from "./styles.module.scss";
 
-const { getUsers, clearUsers } = useUserStore();
+const { users } = storeToRefs(useUserStore());
+const { getUsers, clearUsers, clearSelectedUser } = useUserStore();
 
 const search = ref<string>("");
 const isLoading = ref<boolean>(false);
 const isError = ref<boolean>(false);
 
+const titleClasses = computed((): string[] => {
+  const classes: string[] = [];
+
+  if (isError.value) classes.push(styles.error);
+
+  return classes;
+});
 const titleText = computed((): string => {
-  return isError.value ? "Ошибка. Повторите снова" : "Начните поиск";
+  if (isError.value && !isLoading.value) return "Ошибка. Повторите запрос";
+  if (!users.value.length && search.value && !isLoading.value)
+    return "Ничего не найдено";
+  if (!search.value && !isLoading.value) return "Начните поиск";
+  return "";
 });
 
 const fetchUsers = async (): Promise<void> => {
@@ -57,9 +67,10 @@ const fetchUsers = async (): Promise<void> => {
 watchDebounced(
   search,
   async (): Promise<void> => {
-    if (!search.value) {
+    if (!search.value.length) {
       isError.value = false;
       clearUsers();
+      clearSelectedUser();
       return;
     }
 

@@ -1,20 +1,14 @@
 <template>
   <div :class="styles.list">
-    <Typography v-if="!users.length" variant="font-s" :class="styles.title">
-      ничего не найдено
-    </Typography>
-
-    <div v-else :class="styles.wrapper">
-      <UserListItem
-        v-for="user of users"
-        :key="user.id"
-        v-bind="user"
-        @click="onClick(user.id)"
-      />
-      <Observer />
-      <!-- API не предлагает вроде как пагинацию, но я сделал вот типа ленивую подгрузку
+    <UserListItem
+      v-for="user of users"
+      :key="user.id"
+      v-bind="user"
+      @click="onClick(user.id)"
+    />
+    <Observer />
+    <!-- API не предлагает вроде как пагинацию, но я сделал вот типа ленивую подгрузку
        и, когда пользователей будет 2к и выше, можно ихп подгружать по-странично -->
-    </div>
   </div>
 </template>
 
