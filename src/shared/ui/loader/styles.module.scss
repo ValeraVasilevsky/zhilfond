@@ -1,0 +1,35 @@
+$loader-size: 24px;
+
+.loader {
+  &::after,
+  &::before {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    width: $loader-size;
+    height: $loader-size;
+    content: "";
+    position: absolute;
+    border-radius: 100px;
+  }
+
+  &::before {
+    animation: spinner 1s cubic-bezier(0.6, 0, 0.4, 1) infinite;
+    border: 3px solid transparent;
+    border-top-color: $grey-light;
+    z-index: 1;
+  }
+
+  &::after {
+    border: 3px solid $grey;
+  }
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(359deg);
+  }
+}

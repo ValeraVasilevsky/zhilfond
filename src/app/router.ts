@@ -16,6 +16,7 @@ export const router = createRouter({
           path: "",
           name: "main",
           component: (): Component => import("pages/main/index.vue"),
+          children: [],
         },
       ],
     },

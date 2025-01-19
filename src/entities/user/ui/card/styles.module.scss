@@ -1,0 +1,43 @@
+$gap: 61px;
+$gap-info: 10px;
+$gap-description: 25px;
+
+.card {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: $gap;
+  width: 100%;
+  height: 100%;
+
+  & .info {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: $gap-info;
+
+    & .field {
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+
+      &.description {
+        flex-direction: column;
+        gap: $gap-description;
+        margin-top: 10px;
+      }
+
+      & .key {
+        color: $black;
+        font-weight: 600;
+      }
+
+      & .value {
+        color: $grey;
+        text-align: left;
+        max-width: 439px;
+      }
+    }
+  }
+}
