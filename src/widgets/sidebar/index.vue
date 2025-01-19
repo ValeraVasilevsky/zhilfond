@@ -44,10 +44,10 @@ const titleClasses = computed((): string[] => {
   return classes;
 });
 const titleText = computed((): string => {
+  if (!search.value && !isLoading.value) return "Начните поиск";
   if (isError.value && !isLoading.value) return "Ошибка. Повторите запрос";
   if (!users.value.length && search.value && !isLoading.value)
     return "Ничего не найдено";
-  if (!search.value && !isLoading.value) return "Начните поиск";
   return "";
 });
 
@@ -69,6 +69,7 @@ watchDebounced(
   async (): Promise<void> => {
     if (!search.value.length) {
       isError.value = false;
+      isLoading.value = false;
       clearUsers();
       clearSelectedUser();
       return;
