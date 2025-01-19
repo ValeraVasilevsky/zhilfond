@@ -4,7 +4,11 @@
       Поиск сотрудников
     </Typography>
 
-    <BaseInput v-model="search" placeholder="Введите Id или имя" />
+    <BaseInput
+      v-model="search"
+      placeholder="Введите Id или имя"
+      @update:model-value="startLoader"
+    />
 
     <Typography variant="font-l" :class="styles.title"> Результат </Typography>
 
@@ -15,7 +19,7 @@
         {{ titleText }}
       </Typography>
 
-      <UserList v-if="!isLoading && search.length && users.length" />
+      <UserList v-if="showUsersList" />
     </div>
   </aside>
 </template>
@@ -50,6 +54,9 @@ const titleText = computed((): string => {
     return "Ничего не найдено";
   return "";
 });
+const showUsersList = computed(
+  (): boolean => !isLoading.value && !!search.value && !!users.value.length
+);
 
 const fetchUsers = async (): Promise<void> => {
   isError.value = false;
@@ -62,6 +69,9 @@ const fetchUsers = async (): Promise<void> => {
   } finally {
     isLoading.value = false;
   }
+};
+const startLoader = (): void => {
+  isLoading.value = true;
 };
 
 watchDebounced(
